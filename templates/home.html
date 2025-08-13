@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+
+<!-- Hero Section -->
+<section class="py-5 text-center bg-light rounded shadow-sm">
+  <div class="container">
+    {% if session.get('logged_in') %}
+      <h1 class="fw-bold text-success">Welcome back, {{ session['user_name'] }}! 👋</h1>
+      <p class="lead mt-3">
+        Your personalized Multiple Disease Prediction System is ready.
+        Monitor your health and keep track of your records with ease.
+      </p>
+      <a class="btn btn-success btn-lg mt-3 px-4" href="/predict" role="button">
+        Start Prediction
+      </a>
+    {% else %}
+      <h1 class="fw-bold text-primary">
+      Liver, Kidney, Heart & Diabetes Disease Prediction
+      </h1>
+      <p class="lead mt-3">
+        ML-Based predictions to help you monitor your health.  
+        Sign up today and take the first step toward a healthier future.
+      </p>
+      <div class="mt-4">
+        <a class="btn btn-success btn-lg px-4 me-2" href="/signup" role="button">
+          Sign Up Now
+        </a>
+        <a class="btn btn-outline-secondary btn-lg px-4" href="/login" role="button">
+          Login
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Image Gallery Section -->
+<section class="py-5 gallery-section">
+  <div class="container">
+    <h2 class="fw-bold text-center text-success mb-5">Health & Wellness</h2>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <img src="{{ url_for('static', filename='images/health1.jpg') }}" class="img-fluid rounded shadow-sm" alt="Health Image 1">
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <img src="{{ url_for('static', filename='images/health2.png') }}" class="img-fluid rounded shadow-sm" alt="Health Image 2">
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <img src="{{ url_for('static', filename='images/health3.jpg') }}" class="img-fluid rounded shadow-sm" alt="Health Image 3">
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <img src="{{ url_for('static', filename='images/health4.jpg') }}" class="img-fluid rounded shadow-sm" alt="Health Image 4">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

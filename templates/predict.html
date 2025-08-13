@@ -1,0 +1,1372 @@
+{% extends 'base.html' %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/predict.css') }}"
+/>
+
+<div class="container mt-5">
+  <h1>Disease Prediction</h1>
+  <p class="lead">
+    Select a disease and fill out the form to get a prediction result.
+  </p>
+
+  <!-- Tab navigation for the different diseases -->
+  <ul class="nav nav-tabs" id="diseaseTab" role="tablist">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="heart-tab"
+        data-bs-toggle="tab"
+        href="#heart"
+        role="tab"
+        aria-controls="heart"
+        aria-selected="true"
+        >Heart Disease</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="diabetes-tab"
+        data-bs-toggle="tab"
+        href="#diabetes"
+        role="tab"
+        aria-controls="diabetes"
+        aria-selected="false"
+        >Diabetes Disease</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="kidney-tab"
+        data-bs-toggle="tab"
+        href="#kidney"
+        role="tab"
+        aria-controls="kidney"
+        aria-selected="false"
+        >Kidney Disease</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="liver-tab"
+        data-bs-toggle="tab"
+        href="#liver"
+        role="tab"
+        aria-controls="liver"
+        aria-selected="false"
+        >Liver Disease</a
+      >
+    </li>
+  </ul>
+
+  <!-- Tab content for each disease form -->
+  <div class="tab-content mt-4" id="diseaseTabContent">
+    <!-- Heart Disease  Form -->
+    <div
+      class="tab-pane fade show active"
+      id="heart"
+      role="tabpanel"
+      aria-labelledby="heart-tab"
+    >
+      <form method="POST" action="/predict/heart">
+        <div class="form-group">
+          <label
+            for="age-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enter Your Age."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Age (years)
+          </label>
+
+          <input
+            type="number"
+            class="form-control"
+            id="age-heart"
+            name="age"
+            placeholder="Enter your age"
+            required
+            data-toggle="tooltip"
+            title="Please enter your age in years."
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="gender-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enter Your Gender."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Gender</label
+          >
+          <select class="form-control" id="gender-heart" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="height-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enter Your Height in CM."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Height (cm)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="height-heart"
+            name="height"
+            placeholder="Enter your height"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="weight-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enter Your Body Weight in KG"
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Weight (kg)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="weight-heart"
+            name="weight"
+            placeholder="Enter your weight"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="systolic_bp-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Measures the pressure in your arteries when your heart beats. High levels indicate hypertension."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Systolic Blood Pressure (mmHg) [Normal Range: 90-120]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="systolic_bp-heart"
+            name="systolic_bp"
+            placeholder="Enter your systolic blood pressure"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="diastolic_bp-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Measures the pressure in your arteries when your heart rests between beats. Elevated levels indicate hypertension."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Diastolic Blood Pressure (mmHg) [Normal Range: 60-80]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="diastolic_bp-heart"
+            name="diastolic_bp"
+            placeholder="Enter your diastolic blood pressure"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="cholesterol-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="High cholesterol levels increase the risk of heart disease and stroke."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Cholesterol
+          </label>
+          <select
+            class="form-control"
+            id="cholesterol-heart"
+            name="cholesterol"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="1">Normal</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above Normal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="glucose-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title=" Blood sugar levels. High levels may indicate diabetes or risk for it."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Glucose</label
+          >
+          <select
+            class="form-control"
+            id="glucose-heart"
+            name="glucose"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+
+            <option value="1">Normal</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above Normal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="smoking-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Smoking increases the risk of heart disease, lung disease, and cancer."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Smoking
+          </label>
+          <select
+            class="form-control"
+            id="smoking-heart"
+            name="smoking"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="alcohol-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Excessive alcohol consumption can damage organs and increase the risk of liver disease and hypertension."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Alcohol Consumption ?
+          </label>
+          <select
+            class="form-control"
+            id="alcohol-heart"
+            name="alcohol"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="physical_activity-heart"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Regular exercise improves cardiovascular health, reduces weight, and lowers disease risks."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Physical Activity ?</label
+          >
+          <select
+            class="form-control"
+            id="physical_activity-heart"
+            name="physical_activity"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="algorithm-selection">
+          <p>
+            We have observed that
+            <strong>Logistic Regression and Random Forest</strong> models
+            perform best for heart disease.
+          </p>
+          <div class="form-group">
+            <label><strong>Select Algorithms:</strong></label
+            ><br />
+
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="logistic_regression"
+            />
+            Logistic Regression<br />
+            <input
+              class="ck"
+              type="checkbox"
+              name="algorithms"
+              value="decision_tree"
+            />
+            Decision Tree<br />
+            <input type="checkbox" name="algorithms" value="random_forest" />
+            Random Forest<br />
+            <input type="checkbox" name="algorithms" value="knn" /> KNN<br />
+            <input type="checkbox" name="algorithms" value="svm" /> SVM<br />
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="gradient_boosting"
+            />
+            Gradient Boosting<br />
+            <input type="checkbox" name="algorithms" value="adaboost" />
+            Adaboost<br />
+            <input type="checkbox" name="algorithms" value="stacked" />
+            Stacked Model<br />
+            <!-- Add other algorithms as needed -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Results</button>
+        <br /><br /><br /><br />
+      </form>
+    </div>
+
+    <!-- Diabetes Form -->
+    <div
+      class="tab-pane fade"
+      id="diabetes"
+      role="tabpanel"
+      aria-labelledby="diabetes-tab"
+    >
+      <form method="POST" action="/predict/diabetes">
+        <div class="form-group">
+          <label
+            for="gender-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Biological sex, which may influence diabetes risk."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Gender</label
+          >
+          <select
+            class="form-control"
+            id="gender-diabetes"
+            name="gender"
+            required
+          >
+            <option value=" " disabled selected>Select a Gender</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="age-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Enter Your Age in Years."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Age (years)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="age-diabetes"
+            name="age"
+            placeholder="Enter your age"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="hypertension-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="High blood pressure, often linked with diabetes and heart complications."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Hypertension ?</label
+          >
+          <select
+            class="form-control"
+            id="hypertension-diabetes"
+            name="hypertension"
+            required
+          >
+            <option value=" " disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="heart_disease-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Do you ever had or having any heart related disease ?"
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Have Heart Disease ?</label
+          >
+          <select
+            class="form-control"
+            id="heart_disease-diabetes"
+            name="heart_disease"
+            required
+          >
+            <option value=" " disabled selected>Select</option>
+
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="smoking_history-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title=" Smoking raises the risk of type 2 diabetes and worsens complications."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Smoking History
+          </label>
+          <select
+            class="form-control"
+            id="smoking_history-diabetes"
+            name="smoking_history"
+            required
+          >
+            <option value=" " disabled selected>Select</option>
+
+            <option value="No Info">No Info</option>
+            <option value="never">never</option>
+            <option value="former">former</option>
+            <option value="current">current</option>
+            <option value="not current">not current</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="bmi-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Body Mass Index, higher values can indicate obesity, a major diabetes risk factor."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >BMI (Body Mass Index) [Normal Range: 18.5-24.9]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="bmi-diabetes"
+            name="bmi"
+            placeholder="Enter your BMI"
+            step="0.01"
+            min="0"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="hemoglobin_a1c-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Reflects average blood sugar over 2-3 months; used to diagnose and monitor diabetes."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Hemoglobin A1c Level (%) [Normal Range: 4.0-5.6]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="hemoglobin_a1c-diabetes"
+            name="hemoglobin_a1c"
+            placeholder="Enter your Hemoglobin A1c level"
+            step="0.1"
+            min="0"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="blood_glucose-diabetes"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Measures current blood sugar levels; crucial for diabetes diagnosis and management."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Blood Glucose Level (mg/dL) [Normal Range: 70-140]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="blood_glucose-diabetes"
+            name="blood_glucose"
+            placeholder="Enter your blood glucose level"
+            min="0"
+            required
+          />
+        </div>
+        <div class="algorithm-selection">
+          <p>
+            We have observed that
+            <strong>Gradient Boosting and AdaBoost</strong> models perform best
+            for Diabetes disease.
+          </p>
+          <div class="form-group">
+            <label><strong>Select Algorithms:</strong></label
+            ><br />
+
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="logistic_regression"
+            />
+            Logistic Regression<br />
+            <input type="checkbox" name="algorithms" value="decision_tree" />
+            Decision Tree<br />
+            <input type="checkbox" name="algorithms" value="random_forest" />
+            Random Forest<br />
+            <input type="checkbox" name="algorithms" value="knn" /> KNN<br />
+            <input type="checkbox" name="algorithms" value="svm" /> SVM<br />
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="gradient_boosting"
+            />
+            Gradient Boosting<br />
+            <input type="checkbox" name="algorithms" value="adaboost" />
+            adaboost<br />
+            <input type="checkbox" name="algorithms" value="stacked" />
+            Stacked Model<br />
+
+            <!-- Add other algorithms as needed -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Results</button>
+        <br /><br /><br /><br />
+      </form>
+    </div>
+
+    <!-- Kidney  Disease  Form -->
+    <div
+      class="tab-pane fade"
+      id="kidney"
+      role="tabpanel"
+      aria-labelledby="kidney-tab"
+    >
+      <form method="POST" action="/predict/kidney">
+        <div class="form-group">
+          <label
+            for="age-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Kidney function naturally declines with age, increasing the risk of chronic kidney disease (CKD)."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Age (years)
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            id="age-kidney"
+            name="age"
+            placeholder="Enter your age"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="blood_pressure-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="High BP damages kidney blood vessels over time, leading to CKD and kidney failure."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Blood Pressure (mmHg) [Normal Range: 60-120]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="blood_pressure-kidney"
+            name="blood_pressure"
+            placeholder="Enter your blood pressure"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="specific_gravity-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Measures urine concentration. Low values suggest kidney's inability to concentrate urine, while high values may indicate dehydration."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Specific Gravity [Normal Range: 1.015-1.025]</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="specific_gravity-kidney"
+            name="specific_gravity"
+            placeholder="Enter specific gravity"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="albumin-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="A protein that should remain in the blood. Its presence in urine (albuminuria) signals kidney damage or dysfunction."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Albumin [Normal Range: 0-4]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="albumin-kidney"
+            name="albumin"
+            placeholder="Enter albumin level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="sugar-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="High urine glucose levels indicate diabetes, a leading cause of kidney disease."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Sugar [Normal Range: 0-5]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="sugar-kidney"
+            name="sugar"
+            placeholder="Enter sugar level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="red_blood_cells-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Normally absent in urine. Presence may suggest kidney inflammation, stones, or injury."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Red Blood Cells</label
+          >
+          <select
+            class="form-control"
+            id="red_blood_cells-kidney"
+            name="red_blood_cells"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="normal">Normal</option>
+            <option value="abnormal">Abnormal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="pus_cells-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="White blood cells in urine, often seen in urinary tract infections (UTIs) or kidney infections."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Pus Cells</label
+          >
+          <select
+            class="form-control"
+            id="pus_cells-kidney"
+            name="pus_cells"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="normal">Normal</option>
+            <option value="abnormal">Abnormal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="pus_cell_clumps-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Clusters of white blood cells, indicating severe infection or inflammation."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Pus Cell Clumps</label
+          >
+          <select
+            class="form-control"
+            id="pus_cell_clumps-kidney"
+            name="pus_cell_clumps"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="notpresent">Not Present</option>
+            <option value="present">Present</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="bacteria-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Their presence in urine suggests a UTI, which, if untreated, can spread to the kidneys."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Bacteria</label
+          >
+          <select
+            class="form-control"
+            id="bacteria-kidney"
+            name="bacteria"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="notpresent">Not Present</option>
+            <option value="present">Present</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="blood_glucose_random-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title=" Measures blood sugar at any time. High values are linked to diabetes, a major kidney disease risk factor."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Blood Glucose Random (mg/dL) [Normal Range: 70-140]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="blood_glucose_random-kidney"
+            name="blood_glucose_random"
+            placeholder="Enter random blood glucose level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="blood_urea-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="A waste product from protein metabolism. High levels indicate reduced kidney filtration ability."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Blood Urea (mg/dL) [Normal Range: 7-20]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="blood_urea-kidney"
+            name="blood_urea"
+            placeholder="Enter blood urea level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="serum_creatinine-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title=" A key kidney function marker. Elevated levels suggest kidney dysfunction or reduced filtration rate."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Serum Creatinine (mg/dL) [Normal Range: 0.6-1.2]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="serum_creatinine-kidney"
+            name="serum_creatinine"
+            placeholder="Enter serum creatinine level"
+            step="0.01"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="sodium-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title=" A crucial electrolyte. Imbalances may indicate kidney failure, leading to fluid retention or dehydration."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Sodium (mEq/L) [Normal Range: 135-145]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="sodium-kidney"
+            name="sodium"
+            placeholder="Enter serum sodium level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="potassium-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Regulates heart and muscle function. Abnormal levels can be dangerous in kidney disease."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Potassium (mEq/L) [Normal Range: 3.5-5.0]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="potassium-kidney"
+            name="potassium"
+            placeholder="Enter serum potassium level"
+            step="0.01"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="hemoglobin-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Low levels may indicate anemia, common in CKD due to reduced erythropoietin production."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Hemoglobin (g/dL) [Normal Range: 13.8-17.2 (male), 12.1-15.1
+            (female)]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="hemoglobin-kidney"
+            name="hemoglobin"
+            placeholder="Enter hemoglobin level"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="pcv-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Reflects red blood cell concentration. Low values suggest anemia, often seen in kidney disease."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Packed Cell Volume (PCV) (%) [Normal Range: 38.3-48.6 (male),
+            35.5-44.9 (female)]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="pcv-kidney"
+            name="pcv"
+            placeholder="Enter packed cell volume"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="white_blood_cells-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="High counts suggest infection or inflammation, potentially affecting kidney health."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >White Blood Cells (cells/μL) [Normal Range: 4,000-11,000]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="white_blood_cells-kidney"
+            name="white_blood_cells"
+            placeholder="Enter white blood cell count"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="red_blood_cells_count-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="A low count may indicate CKD-related anemia due to impaired red blood cell production."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Red Blood Cells Count (million cells/μL) [Normal Range: 4.7-6.1
+            (male), 4.2-5.4 (female)]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="red_blood_cells_count-kidney"
+            name="red_blood_cells_count"
+            placeholder="Enter red blood cells count"
+            step="0.01"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="hypertension-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Both a cause and consequence of kidney disease. High BP can accelerate kidney damage."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Hypertension</label
+          >
+          <select
+            class="form-control"
+            id="hypertension-kidney"
+            name="hypertension"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="diabetes_mellitus-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Chronic high blood sugar can damage kidney filtering units, leading to diabetic nephropathy."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Diabetes Mellitus</label
+          >
+          <select
+            class="form-control"
+            id="diabetes_mellitus-kidney"
+            name="diabetes_mellitus"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="cad-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Common in CKD patients due to shared risk factors like hypertension and diabetes."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Coronary Artery Disease</label
+          >
+          <select class="form-control" id="cad-kidney" name="cad" required>
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="appetite-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Loss of appetite may occur due to toxin buildup in kidney failure."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Appetite</label
+          >
+          <select
+            class="form-control"
+            id="appetite-kidney"
+            name="appetite"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="good">Good</option>
+            <option value="poor">Poor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="pedal_edema-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="Swelling in feet due to fluid retention, a common sign of kidney dysfunction."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Pedal Edema</label
+          >
+          <select
+            class="form-control"
+            id="pedal_edema-kidney"
+            name="pedal_edema"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="anemia-kidney"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-custom-class="custom-tooltip"
+            data-bs-title="CKD can reduce red blood cell production, leading to fatigue and weakness."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Anemia</label
+          >
+          <select
+            class="form-control"
+            id="anemia-kidney"
+            name="anemia"
+            required
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div class="algorithm-selection">
+          <p>
+            We have observed that
+            <strong>Random Forest</strong> model perform best for Kidney
+            disease.
+          </p>
+          <div class="form-group">
+            <label><strong>Select Algorithms:</strong></label
+            ><br />
+
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="logistic_regression"
+            />
+            Logistic Regression<br />
+            <input type="checkbox" name="algorithms" value="decision_tree" />
+            Decision Tree<br />
+            <input type="checkbox" name="algorithms" value="random_forest" />
+            Random Forest<br />
+            <input type="checkbox" name="algorithms" value="knn" /> KNN<br />
+            <input type="checkbox" name="algorithms" value="svm" /> SVM<br />
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="gradient_boosting"
+            />
+            Gradient Boosting<br />
+            <input type="checkbox" name="algorithms" value="adaboost" />
+            adaboost<br />
+            <!--<input type="checkbox" name="algorithms" value="stacked" />
+            Stacked Model<br /> -->
+            <!-- Add other algorithms as needed -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Results</button>
+        <br /><br /><br /><br />
+      </form>
+    </div>
+
+    <!-- Liver Disease Form -->
+    <div
+      class="tab-pane fade"
+      id="liver"
+      role="tabpanel"
+      aria-labelledby="liver-tab"
+    >
+      <form method="POST" action="/predict/liver">
+        <div class="form-group">
+          <label
+            for="age-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Patient’s age in years. Risk of liver disease increases with age but is non-specific."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Age (years)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="age-liver"
+            name="age"
+            placeholder="Enter your age"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="gender-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Biological sex of the patient. Some liver conditions have gender-specific prevalence."
+            data-bs-custom-class="custom-tooltip"
+            class="low"
+            >Gender</label
+          >
+          <select class="form-control" id="gender-liver" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label
+            for="total_bilirubin-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="	Measures all bilirubin in the blood. High levels indicate liver dysfunction or jaundice."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Total Bilirubin (mg/dL) [Normal Range: 0.1-1.2]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="total_bilirubin-liver"
+            name="total_bilirubin"
+            placeholder="Enter total bilirubin level"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="direct_bilirubin-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Conjugated bilirubin level. Elevated levels are linked to bile duct or liver damage."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Direct Bilirubin (mg/dL) [Normal Range: 0-0.4]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="direct_bilirubin-liver"
+            name="direct_bilirubin"
+            placeholder="Enter direct bilirubin level"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="alkaline_phosphotase-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Enzyme related to bile ducts. High values suggest bile flow obstruction or liver damage."
+            data-bs-custom-class="custom-tooltip"
+            class="high"
+            >Alkaline Phosphotase (U/L) [Normal Range: 44-147]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="alkaline_phosphotase-liver"
+            name="alkaline_phosphotase"
+            placeholder="Enter alkaline phosphotase level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="alamine_aminotransferase-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Liver enzyme. Elevated ALT usually indicates liver cell injury."
+            class="high"
+            data-bs-custom-class="custom-tooltip"
+            >Alamine Aminotransferase (U/L) [Normal Range: 7-56]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="alamine_aminotransferase-liver"
+            name="alamine_aminotransferase"
+            placeholder="Enter alamine aminotransferase level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="aspartate_aminotransferase-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="	Enzyme found in liver and other organs. High AST may reflect liver or heart issues."
+            class="moderate"
+            data-bs-custom-class="custom-tooltip"
+            >Aspartate Aminotransferase (U/L) [Normal Range: 10-40]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="aspartate_aminotransferase-liver"
+            name="aspartate_aminotransferase"
+            placeholder="Enter aspartate aminotransferase level"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="total_proteins-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Sum of albumin and globulin in blood. Low levels may indicate liver dysfunction."
+            data-bs-custom-class="custom-tooltip"
+            class="moderate"
+            >Total Proteins (g/dL) [Normal Range: 6-8.3]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="total_proteins-liver"
+            name="total_proteins"
+            placeholder="Enter total proteins level"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="albumin-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="	Protein made by the liver. Low levels may point to chronic liver disease."
+            class="high"
+            data-bs-custom-class="custom-tooltip"
+            >Albumin (g/dL) [Normal Range: 3.4-5.4]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="albumin-liver"
+            name="albumin"
+            placeholder="Enter albumin level"
+            step="0.1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label
+            for="albumin_globulin_ratio-liver"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            data-bs-title="Ratio of two blood proteins. An abnormal ratio may signal liver disease or infection."
+            class="moderate"
+            data-bs-custom-class="custom-tooltip"
+            >Albumin and Globulin Ratio [Normal Range: 1-2.5]</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="albumin_globulin_ratio-liver"
+            name="albumin_globulin_ratio"
+            placeholder="Enter albumin and globulin ratio"
+            step="0.1"
+            required
+          />
+        </div>
+
+        <div class="algorithm-selection">
+          <p>
+            We have observed that
+            <strong>Logistic Regression and Random Forest </strong> models
+            perform best for Liver disease.
+          </p>
+          <div class="form-group">
+            <label><strong>Select Algorithms:</strong></label
+            ><br />
+
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="logistic_regression"
+            />
+            Logistic Regression<br />
+            <input type="checkbox" name="algorithms" value="decision_tree" />
+            Decision Tree<br />
+            <input type="checkbox" name="algorithms" value="random_forest" />
+            Random Forest<br />
+            <input type="checkbox" name="algorithms" value="knn" /> KNN<br />
+            <input type="checkbox" name="algorithms" value="svm" /> SVM<br />
+            <input
+              type="checkbox"
+              name="algorithms"
+              value="gradient_boosting"
+            />
+            Gradient Boosting<br />
+            <input type="checkbox" name="algorithms" value="adaboost" />
+            adaboost<br />
+            <input type="checkbox" name="algorithms" value="stacked" />
+            Stacked Model<br />
+            <!-- Add other algorithms as needed -->
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Get Results</button>
+        <br /><br /><br /><br />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

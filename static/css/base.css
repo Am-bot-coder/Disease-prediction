@@ -1,0 +1,58 @@
+/* General Theme */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #f4f6f8;
+  color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+  background: linear-gradient(90deg, #2a5298, #1e3c72);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+.nav-link {
+  color: #f1f1f1 !important;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ffcc70 !important;
+}
+
+/* Buttons */
+.btn-light {
+  color: #1e3c72;
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.btn-light:hover {
+  background-color: #ffcc70;
+  color: #1e3c72;
+}
+
+/* Footer */
+.footer {
+  background: #1e3c72;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.footer small {
+  opacity: 0.8;
+}
+
+.footer .container {
+  max-width: 600px;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 10px;
+}

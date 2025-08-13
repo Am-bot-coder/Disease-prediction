@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Multiple Disease Prediction System</h1>
+    <p class="hero-subtitle">
+      Empowering healthcare through intelligent and early disease prediction.
+    </p>
+    <a href="/predict" class="cta-button">Get Started</a>
+  </div>
+</section>
+
+<section class="about-section">
+  <h2 class="section-title">About the Project</h2>
+  <p class="about-text">
+    The Multiple Disease Prediction System is a machine learning powered web platform 
+    designed to help users assess their health risks for multiple diseases using basic 
+    medical parameters. By combining data-driven insights with a simple and secure 
+    interface, the system aims to enable early detection and timely medical advice.
+  </p>
+</section>
+
+<section class="features-section">
+  
+  <div class="feature-cards">
+    <div class="feature-card">
+      <h3>Quick Health Assessment</h3>
+      <p>Enter your health details and receive instant predictions.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Advanced Machine Learning</h3>
+      <p>Trained models ensure accurate and reliable results.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Secure & Private</h3>
+      <p>Your health data is handled with top-level security measures.</p>
+    </div>
+    <div class="feature-card">
+      <h3>User-Friendly Interface</h3>
+      <p>Minimal clicks, maximum efficiency – designed for everyone.</p>
+    </div>
+  </div>
+</section>
+
+<section class="benefits-section">
+  <h2 class="section-title">Why Choose This System?</h2>
+  <ul class="benefits-list">
+    <li>✔ Early detection can save lives</li>
+    <li>✔ Works on multiple disease categories</li>
+    <li>✔ Accessible anytime, anywhere</li>
+    <li>✔ Scientifically validated ML approach</li>
+  </ul>
+</section>
+
+{% endblock %}

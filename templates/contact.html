@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+
+<section class="contact-section">
+  <h1>Contact Us</h1>
+  <p>If you have any questions or feedback, feel free to reach out to us.</p>
+
+  <div class="contact-details">
+    <div class="contact-item">
+      <h2 class="contact-title">Phone</h2>
+      <p>+91 8468864677</p>
+    </div>
+    <div class="contact-item">
+      <h2 class="contact-title">Email</h2>
+      <p>ayushmahadik49@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
