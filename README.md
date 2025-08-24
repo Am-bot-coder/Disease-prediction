@@ -7,7 +7,6 @@ The system provides an intuitive interface for healthcare professionals and indi
 
 ## 📌 Features
 - **Machine Learning Model** for liver disease prediction.
-- **Responsive UI** built with React.js for a seamless user experience.
 - **Flask API Backend** to handle prediction requests.
 - **Data-driven insights** displayed in an easy-to-understand format.
 - **Gallery Section** with AI-healthcare themed images.
