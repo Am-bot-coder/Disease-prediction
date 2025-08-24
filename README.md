@@ -19,10 +19,3 @@ The system provides an intuitive interface for healthcare professionals and indi
 Pull requests are welcome! For major changes, please open an issue first to discuss the proposed update.
 
 ---
-
-## 🚀 Getting Started
-
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/yourusername/liver-disease-prediction.git
-cd liver-disease-prediction
