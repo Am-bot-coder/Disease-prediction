@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'ayush2004'  # set your MySQL root password here
+app.config['MYSQL_PASSWORD'] = 'your password'  # set your MySQL root password here
 app.config['MYSQL_DB'] = 'project'  # replace with your actual DB name
 app.config['SECRET_KEY'] = '151220'
 
