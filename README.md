@@ -1,6 +1,6 @@
 # 🩺 AI-Powered Disease Prediction System
 
-An AI-driven web application designed to predict disease risk using machine learning models, presented with a **React.js frontend** and **Flask backend**.  
+An AI-driven web application designed to predict disease risk using machine learning models, presented with a **HTML-CSS frontend** and **Flask backend**.  
 The system provides an intuitive interface for healthcare professionals and individuals to assess liver health based on clinical parameters.
 
 ---
